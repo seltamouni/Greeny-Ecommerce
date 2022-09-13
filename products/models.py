@@ -41,7 +41,7 @@ class Category(models.Model):
 
 class Brand(models.Model):
     name = models.CharField(_('Name'), max_length=100)
-    image = models.ImageField(_('Image'), upload_to=('category'))
+    image = models.ImageField(_('Image'), upload_to=('brand'))
 
     def __str__(self):
         return self.name

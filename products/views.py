@@ -11,6 +11,7 @@ class ProductList(ListView):
     model = Product
     #html:product_list;object_list
     #context:product_list;object_list
+    paginate_by=100
 
 class ProductDetail(DetailView):
     model = Product 
@@ -22,7 +23,8 @@ class ProductDetail(DetailView):
         return context
        
 class BrandList(ListView):
-    model = Brand   
+    model = Brand  
+    #paginate_by = 5 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -31,6 +33,8 @@ class BrandList(ListView):
 
 class BrandDetail(DetailView):
     model = Brand
+    #paginate_by = 10
+    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -40,6 +44,7 @@ class BrandDetail(DetailView):
 
 class categoryList(ListView):
     model = Category
+    paginate_by=10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
