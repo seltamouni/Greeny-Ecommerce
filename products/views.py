@@ -4,7 +4,7 @@ from unicodedata import category
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView
 from .models import Brand, Product,ProductImages,Category
-from django.db.models import Count
+from django.db.models import Count,Q,F
 # Create your views here.
 
 class ProductList(ListView):
@@ -52,3 +52,11 @@ class categoryList(ListView):
             product_count=Count('product_category'))
         return context
                 
+
+def test(request):
+    #context = Product.objects.filter(name__contains='sara')
+    #context = Product.objects.order_by('name')
+    #context = Product.objects.all()[:15]
+    #context = Product.objects.values('id','name','sku')
+    context = Product.objects.values('id','name','price')
+    return render (request,'products/test_list.html',{'products':context})                

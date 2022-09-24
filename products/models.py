@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 from taggit.managers import TaggableManager
 
+from django.db.models.aggregates import Avg
 # Create your models here.
 
 PRODUCT_FLAG = (
@@ -27,6 +28,11 @@ class Product(models.Model):
     category = models.ForeignKey('category', verbose_name=_('Category'), related_name='product_category', on_delete=models.SET_NULL,null=True,blank=True)
     brand = models.ForeignKey('brand',verbose_name=_('Brand'), related_name='product_brand', on_delete=models.SET_NULL,null=True,blank=True)
     video_url = models.URLField(_('Video'),null=True,blank=True)
+    quantity = models.IntegerField(default=50)
+
+    def get_avg(self):
+        avg = self.product_review.aggregate(myavr=Avg('rate'))
+        return avg
 
     def __str__(self):
         return self.name
