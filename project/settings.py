@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'taggit',
     'django_summernote',
     "debug_toolbar",
+    "django-countries",
 ]
 
 MIDDLEWARE = [
