@@ -1,9 +1,12 @@
 from distutils.command.upload import upload
 from random import choices
 from django.db import models
-from django_countries.fields import Country_Field
+
 from django.contrib.auth.models import User
 from utils.generate_code import generate_code
+from django_countries.fields import CountryField
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 # Create your models here.
 class Profile(models.Model):
@@ -13,6 +16,12 @@ class Profile(models.Model):
     code = models.CharField(max_length=10,default=generate_code)
     code_used = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
+
+@receiver(post_save,sender=User)
+def create_profile(sender,instance,created,**kwargs):
+    if created :
+        Profile.objects.create(user=instance)
+
 
 DATA_TYPE = (
     ('Home','Home'),
@@ -30,7 +39,7 @@ class UserPhoneNumber(models.Model):
 class UserAddress(models.Model):
     user = models.ForeignKey(User, related_name='user_address', on_delete=models.CASCADE)
     type = models.CharField(choices=DATA_TYPE, max_length=10)
-    country = Country_Field()
+    country = CountryField()
     city = models.CharField(max_length=20)
     state = models.CharField(max_length=30)
     region = models.CharField(max_length=30)

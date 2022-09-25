@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'taggit',
     'django_summernote',
     "debug_toolbar",
-    "django-countries",
+    
+    "django_countries",
 ]
 
 MIDDLEWARE = [
@@ -147,3 +148,5 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+AUTHENTICATION_BACKENDS = ['accounts.backends.EmailBackend']
