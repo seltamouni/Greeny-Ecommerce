@@ -9,3 +9,6 @@ products,
 Order,
 brands,
 Review products.
+
+### auth
+- 'api/auth/token/ POST': api 
